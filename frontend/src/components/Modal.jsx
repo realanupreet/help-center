@@ -1,16 +1,8 @@
 import { useState } from "react";
 
-const generateUniqueId = (buttonText) => {
-    return `${buttonText.toLowerCase().replace(/ /g, "-")}-${Math.random().toString(36).substring(2, 15)}`;
-}
+const Modal = ({ buttonText, buttonStyles, children, buttonModalId }) => {
 
-const Modal = ({ buttonText, buttonStyles, children, isOpen = true }) => {
-
-    const [modalId] = useState(generateUniqueId(buttonText));
-
-    if (!isOpen) {
-        document.getElementById(modalId).close();
-    };
+    const [modalId] = useState(buttonModalId);
 
     return (
         <>

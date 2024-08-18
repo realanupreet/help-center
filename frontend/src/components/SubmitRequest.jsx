@@ -8,7 +8,7 @@ const SubmitRequest = () => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [modalOpen, setModalOpen] = useState(true);
+    const modalId = "submitRequestModal";
 
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: async (newData) => {
@@ -19,7 +19,7 @@ const SubmitRequest = () => {
             queryClient.invalidateQueries(['gridData']);
             setTitle('');
             setDescription('');
-            setModalOpen(false);
+            document.getElementById(modalId).close();
         },
         onError: (error) => {
             console.error('Error adding data:', error);
@@ -33,7 +33,7 @@ const SubmitRequest = () => {
 
     return (
         <>
-            <Modal buttonText="Submit Request" buttonStyles="" isOpen={ modalOpen }>
+            <Modal buttonText="Submit Request" buttonStyles="" buttonModalId={ modalId } >
                 {/* TODO: Subdivide to smaller components */ }
                 <form onSubmit={ handleSubmitRequest }>
                     <label className="form-control w-full max-w-xs">
@@ -63,7 +63,7 @@ const SubmitRequest = () => {
                     </button>
                     { isError && <div className="text-red-500">Error submitting request: { error.message }</div> }
                 </form>
-            </Modal>
+            </Modal >
         </>
     );
 }
