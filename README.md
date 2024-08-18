@@ -21,7 +21,8 @@ How to run the app?
     MYSQL_PASSWORD=
     MYSQL_DATABASE=help_center
 
-    PORT=3000```
+    PORT=3000
+    ```
 6. Also add credentials in `backend/.env` file the same way `DATABASE_URL="mysql://root:@127.0.0.1:3306/help_center?schema=public"`
 4. Start frontend `npm start:frontend`
 5. Open a second terminal window and start backend `npm start:backend`
