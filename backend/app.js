@@ -4,6 +4,7 @@ import {
     getAllRequests,
     getOneRequest,
     createRequest,
+    searchRequest,
 } from './database.js';
 import { serverConfig } from './env.js';
 
@@ -18,7 +19,13 @@ if (app.get('env') === 'development') {
 }
 
 app.get('/', async (req, res) => {
-    const data = await getAllRequests();
+    const data = await getAllRequests(req.body);
+    res.send(data);
+});
+
+app.post('/search', async (req, res) => {
+    console.log('request received', req.body);
+    const data = await searchRequest(req.body);
     res.send(data);
 });
 

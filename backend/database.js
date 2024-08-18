@@ -61,6 +61,7 @@ export {
     getAllRequests,
     getOneRequest,
     createRequest,
+    searchRequest,
     pool,
 };
 

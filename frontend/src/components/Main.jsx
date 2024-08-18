@@ -3,13 +3,18 @@ import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import SubmitRequest from "./SubmitRequest";
+import { useAtom } from "jotai";
+import { searchValue } from "../atoms";
 
 const Main = () => {
+    const [search] = useAtom(searchValue);
 
     const queryClient = useQueryClient();
 
     const fetchGridData = async () => {
-        const response = await axios.get('http://localhost:3000/'); //TODO: make it a env variable
+        const data = { search: search };
+        console.log(data);
+        const response = await axios.post('http://localhost:3000/search', data); //TODO: make url a env variable
         return response.data;
     }
 
@@ -17,8 +22,6 @@ const Main = () => {
         queryKey: ['gridData'],
         queryFn: fetchGridData,
     });
-
-    console.log(gridData);
 
     return (
         <>
