@@ -33,34 +33,33 @@ const SubmitRequest = () => {
 
     return (
         <>
-            <Modal buttonText="Submit Request" buttonStyles="" buttonModalId={ modalId } >
+            <Modal buttonText="Submit Request" buttonStyles="m-1 rounded-md bg-[#1a1a1a] p-1 px-3 text-md border border-[#494949]" buttonModalId={ modalId } >
                 {/* TODO: Subdivide to smaller components */ }
                 <form onSubmit={ handleSubmitRequest }>
-                    <label className="form-control w-full max-w-xs">
+                    <label className="form-control w-full max-w-xs text-black">
                         <div className="label">
                             <span className="label-text">Request Title</span>
                         </div>
                         <input
-                            type="text" placeholder="Request Title" className="input input-bordered w-full max-w-xs input-primary"
+                            type="text" placeholder="Request Title" className="input input-bordered w-full max-w-xs border-[#494949]"
                             value={ title }
                             onChange={ (e) => setTitle(e.target.value) }
                             required
                         />
                     </label>
-                    <label className="form-control w-full max-w-xs">
+                    <label className="form-control w-full max-w-xs text-black">
                         <div className="label">
                             <span className="label-text">Describe your request</span>
                         </div>
                         <input
-                            type="text" placeholder="Describe your request" className="input input-bordered w-full max-w-xs input-primary"
+                            type="text" placeholder="Describe your request" className="input input-bordered w-full max-w-xs border-[#494949]"
                             value={ description }
                             onChange={ (e) => setDescription(e.target.value) }
                             required
                         />
                     </label>
-                    <button className="btn mt-3 btn-primary" type="submit" disabled={ isPending }>
+                    <button className="mt-6 rounded-md bg-[#1a1a1a] p-3 px-3 text-md border border-[#494949] flex items-center gap-3" type="submit" disabled={ isPending }>
                         Submit Request
-                        { isPending }
                         { isPending && <span className="loading loading-spinner"></span> }
                     </button>
                     { isError && <div className="text-red-500">Error submitting request: { error.message }</div> }
