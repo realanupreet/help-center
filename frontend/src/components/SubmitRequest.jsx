@@ -34,6 +34,7 @@ const SubmitRequest = () => {
     return (
         <>
             <Modal buttonText="Submit Request" buttonStyles="" isOpen={ modalOpen }>
+                {/* TODO: Subdivide to smaller components */ }
                 <form onSubmit={ handleSubmitRequest }>
                     <label className="form-control w-full max-w-xs">
                         <div className="label">
