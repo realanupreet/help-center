@@ -16,8 +16,8 @@ const Header = () => {
         <>
             <form onSubmit={ handleSubmitRequest }>
                 <header className="bg-[#dadbf0] p-12 flex flex-col items-center gap-10">
-                    <h1 className="text-5xl">How can we help?</h1>
-                    <label className="input input-bordered flex items-center gap-2 max-w-lg w-1/2 rounded border-black">
+                    <h1 className="text-5xl text-center">How can we help?</h1>
+                    <label className="input input-bordered flex items-center gap-2 max-w-lg md:w-1/2 rounded border-black shadow-lg">
                         <input
                             type="text" className="grow" placeholder="Search"
                             value={ search }

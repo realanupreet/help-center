@@ -25,16 +25,20 @@ const Main = () => {
 
     return (
         <>
-            <p>My Grid Data</p>
-            <SubmitRequest />
-            { isPending && <li>Loading...</li> }
-            { error && <li>Error: { error.message }</li> }
-            {
-                gridData &&
-                gridData.toReversed().map(({ title, data, id }) => (
-                    <Card key={ id } title={ title } data={ data } id={ id } />
-                ))
-            }
+            <div className="mx-[10%] mt-6">
+                <div className="container mx-auto">
+                    <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
+                        { isPending && <li>Loading...</li> }
+                        { error && <li>Error: { error.message }</li> }
+                        {
+                            gridData &&
+                            gridData.toReversed().map(({ title, data, id }) => (
+                                <Card key={ id } title={ title } data={ data } id={ id } />
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

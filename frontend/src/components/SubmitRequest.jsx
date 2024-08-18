@@ -44,6 +44,7 @@ const SubmitRequest = () => {
                             type="text" placeholder="Request Title" className="input input-bordered w-full max-w-xs input-primary"
                             value={ title }
                             onChange={ (e) => setTitle(e.target.value) }
+                            required
                         />
                     </label>
                     <label className="form-control w-full max-w-xs">
@@ -54,6 +55,7 @@ const SubmitRequest = () => {
                             type="text" placeholder="Describe your request" className="input input-bordered w-full max-w-xs input-primary"
                             value={ description }
                             onChange={ (e) => setDescription(e.target.value) }
+                            required
                         />
                     </label>
                     <button className="btn mt-3 btn-primary" type="submit" disabled={ isPending }>
