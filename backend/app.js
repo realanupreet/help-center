@@ -6,6 +6,7 @@ import {
     createRequest,
     searchRequest,
 } from './database.js';
+import { errorHandler } from './middleware/errorHandler.js';
 import { serverConfig } from './env.js';
 
 const app = express();
@@ -30,7 +31,7 @@ app.post('/search', async (req, res) => {
 });
 
 app.get('/ping', (req, res) => {
-    res.send('pong');
+    res.send('Server is running');
 });
 
 app.get('/request/:id', async (req, res) => {
@@ -50,6 +51,9 @@ app.post('/', async (req, res) => {
         });
     }, 2000);
 });
+
+//middleware to handle errors
+app.use(errorHandler); 
 
 app.listen(serverConfig.port, () => { 
     console.log(`Server is running on http://localhost:${serverConfig.port}`);

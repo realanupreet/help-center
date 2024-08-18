@@ -32,8 +32,8 @@ const Main = () => {
                         { error && <li>Error: { error.message }</li> }
                         {
                             gridData &&
-                            gridData.toReversed().map(({ title, data, id }) => (
-                                <Card key={ id } title={ title } data={ data } id={ id } />
+                            gridData.toReversed().map(({ title, description, id }) => (
+                                <Card key={ id } title={ title } data={ description } id={ id } />
                             ))
                         }
                     </div>
