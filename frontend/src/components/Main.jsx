@@ -1,26 +1,33 @@
 import Card from "./Card";
+import axios from 'axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const Main = () => {
 
-    const gridData = [
-        {
-            index: 1,
-            title: "My First Card",
-            data: "This is my first card"
-        },
-        {
-            index: 2,
-            title: "My Second Card",
-            data: "This is my second card"
-        }
-    ]
+    const queryClient = useQueryClient();
+
+    const fetchGridData = async () => {
+        const response = await axios.get('http://localhost:3000/'); //TODO: make it a env variable
+        return response.data;
+    }
+
+    const { isPending, error, data: gridData } = useQuery({
+        queryKey: ['gridData'],
+        queryFn: fetchGridData,
+    });
+
+    console.log(gridData);
 
     return (
         <>
             <p>My Grid Data</p>
+            { isPending && <li>Loading...</li> }
+            { error && <li>Error: { error.message }</li> }
             {
-                gridData.map(({ index, title, data }) => (
-                    <Card key={ index } title={ title } data={ data } />
+                gridData &&
+                gridData.map(({ title, data, id }) => (
+                    <Card key={ id } title={ title } data={ data } id={ id } />
                 ))
             }
         </>

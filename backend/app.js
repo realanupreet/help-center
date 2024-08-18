@@ -19,10 +19,11 @@ if (app.get('env') === 'development') {
 
 app.get('/', async (req, res) => {
     const data = await getAllRequests();
-    res.send({
-        message: 'Backend is live and running!',
-        data: data,
-    });
+    res.send(data);
+});
+
+app.get('/ping', (req, res) => {
+    res.send('pong');
 });
 
 app.get('/request/:id', async (req, res) => {
