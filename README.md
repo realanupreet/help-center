@@ -1,3 +1,5 @@
+Note: frontend.md and backend.md are also available in the root directory for more detailed information about frontend and backend. frontend.md contains the answers aswell.
+
 # Help Center
 
 How to run the app? 
@@ -14,6 +16,7 @@ How to run the app?
     `cd help-center`
 3. Install Dependencies `npm install`
 4. Make a copy of `.env.example` and rename it to `.env`
+5. Make a DB named `help_center` in MySQL
 5. Add credentials in `.env` file example
    ```bash
     MYSQL_HOST=localhost
