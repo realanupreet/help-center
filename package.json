@@ -1,0 +1,14 @@
+{
+    "name": "project-root",
+    "version": "1.0.0",
+    "scripts": {
+        "install": "npm run install:frontend && npm run install:backend",
+        "install:frontend": "cd frontend && npm install",
+        "install:backend": "cd backend && npm install",
+        "start:frontend": "cd frontend && npm run dev",
+        "start:backend": "cd backend && npm run migrate && npm run start",
+        "start:backend-dev": "cd backend && npm run migrate && npm run dev"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

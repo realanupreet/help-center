@@ -1,49 +1,63 @@
 import mysql from 'mysql2';
 import { dbConfig } from './env.js';
+import { PrismaClient } from '@prisma/client';
 
 const pool = mysql.createPool(dbConfig).promise();
 
-
-const query = async (sql, params) => {
-    const [rows, fields] = await pool.query(sql, params);
-    return rows;
-}
+const prisma = new PrismaClient();
 
 const getAllRequests = async () => {
-    let result = await query('SELECT * FROM help_center');
+    let result = await prisma.card.findMany();;
     return result;
 }
 
-const getOneRequest = async (id) => {
-    let result = await query('SELECT * FROM help_center WHERE id = ?', [id]);
-    return result[0];
+const getOneRequest = async (title) => {
+    console.log(title);
+    try {
+        let result = await prisma.card.findMany({
+            where: { title: title },
+        });
+        console.log(result);
+        return result;
+    } catch (error) {
+        return { error: 'Request not found' };
+    }
 }
 
 const createRequest = async (request) => {
-    let result = await query(`
-        
-        INSERT INTO 
-        help_center (title, data) 
-        VALUES (?, ?)
+    let result = await prisma.card.create({
+        data: {
+            title: request.title,
+            description: request.data,
+        },
+    });
 
-        `,
-        [
-            request.title,
-            request.data,
-        ]
-    );
+    return result.insertId;
+}
 
+const searchRequest = async (request) => {
+    let result = prisma.card.findMany({
+        where: {
+            OR: [
+                { title: { contains: request.search } },
+                { description: { contains: request.search } },
+            ],
+        },
+    });
     return result;
 }
 
 console.log(await getAllRequests());
-console.log(await getOneRequest(1));
+console.log(await getOneRequest('sample'));
 // console.log(await createRequest({ title: 'New Request', data: 'This is a new request' }));
+console.log('search test');
+console.log(await searchRequest({ search: 'ne' }));
 
-export default {
+export {
     getAllRequests,
     getOneRequest,
     createRequest,
+    searchRequest,
     pool,
 };
 
