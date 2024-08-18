@@ -1,19 +1,7 @@
 import mysql from 'mysql2';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { dbConfig } from './env.js';
 
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
-
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
-
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-}).promise();
+const pool = mysql.createPool(dbConfig).promise();
 
 
 const query = async (sql, params) => {
@@ -26,7 +14,36 @@ const getAllRequests = async () => {
     return result;
 }
 
-console.log(await getAllRequests());
+const getOneRequest = async (id) => {
+    let result = await query('SELECT * FROM help_center WHERE id = ?', [id]);
+    return result[0];
+}
 
-export default pool;
+const createRequest = async (request) => {
+    let result = await query(`
+        
+        INSERT INTO 
+        help_center (title, data) 
+        VALUES (?, ?)
+
+        `,
+        [
+            request.title,
+            request.data,
+        ]
+    );
+
+    return result;
+}
+
+console.log(await getAllRequests());
+console.log(await getOneRequest(1));
+// console.log(await createRequest({ title: 'New Request', data: 'This is a new request' }));
+
+export default {
+    getAllRequests,
+    getOneRequest,
+    createRequest,
+    pool,
+};
 
