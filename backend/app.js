@@ -33,7 +33,8 @@ app.get('/request/:id', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const request = req.body;
+    let request = req.body;
+    request.data = request.description || '';
     const id = await createRequest(request);
     setTimeout(() => {
         res.send({
