@@ -1,6 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import database from './database.js';
+import {
+    getAllRequests,
+    getOneRequest,
+    createRequest,
+} from './database.js';
 import { serverConfig } from './env.js';
 
 const app = express();
@@ -13,10 +17,25 @@ if (app.get('env') === 'development') {
 }
 
 app.get('/', async (req, res) => {
-    const data = await database.getAllRequests();
+    const data = await getAllRequests();
     res.send({
         message: 'Backend is live and running!',
         data: data,
+    });
+});
+
+app.get('/request/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = await getOneRequest(id);
+    res.send(data);
+});
+
+app.post('/', async (req, res) => {
+    const request = req.body;
+    const id = await createRequest(request);
+    res.send({
+        message: 'Request created successfully',
+        id: id,
     });
 });
 

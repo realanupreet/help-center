@@ -20,7 +20,7 @@ const getOneRequest = async (id) => {
 }
 
 const createRequest = async (request) => {
-    let result = await query(`
+    let [result] = await query(`
         
         INSERT INTO 
         help_center (title, data) 
@@ -33,14 +33,14 @@ const createRequest = async (request) => {
         ]
     );
 
-    return result;
+    return result.insertId;
 }
 
 console.log(await getAllRequests());
 console.log(await getOneRequest(1));
 // console.log(await createRequest({ title: 'New Request', data: 'This is a new request' }));
 
-export default {
+export {
     getAllRequests,
     getOneRequest,
     createRequest,
