@@ -20,7 +20,7 @@ const getOneRequest = async (id) => {
 }
 
 const createRequest = async (request) => {
-    let [result] = await query(`
+    let result = await query(`
         
         INSERT INTO 
         help_center (title, data) 

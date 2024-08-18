@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 // For pretty-printing JSON
 if (app.get('env') === 'development') {
     app.set('json spaces', 2);
