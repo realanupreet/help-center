@@ -25,7 +25,7 @@ const Main = () => {
 
     return (
         <>
-            <div className="mx-[10%] mt-6">
+            <div className="mx-[10%] mt-28">
                 <div className="container mx-auto">
                     <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
                         { isPending && <li>Loading...</li> }

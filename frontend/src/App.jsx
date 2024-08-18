@@ -6,7 +6,6 @@ import Main from './components/Main'
 const App = () => {
   return (
     <>
-      <h1>Help Center App</h1>
       <Header />
       <Main />
       <Footer />
