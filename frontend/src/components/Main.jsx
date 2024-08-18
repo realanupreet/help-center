@@ -2,6 +2,7 @@ import Card from "./Card";
 import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import SubmitRequest from "./SubmitRequest";
 
 const Main = () => {
 
@@ -22,6 +23,7 @@ const Main = () => {
     return (
         <>
             <p>My Grid Data</p>
+            <SubmitRequest />
             { isPending && <li>Loading...</li> }
             { error && <li>Error: { error.message }</li> }
             {

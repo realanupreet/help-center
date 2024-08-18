@@ -35,10 +35,12 @@ app.get('/request/:id', async (req, res) => {
 app.post('/', async (req, res) => {
     const request = req.body;
     const id = await createRequest(request);
-    res.send({
-        message: 'Request created successfully',
-        id: id,
-    });
+    setTimeout(() => {
+        res.send({
+            message: 'Request created successfully',
+            id: id,
+        });
+    }, 2000);
 });
 
 app.listen(serverConfig.port, () => { 
