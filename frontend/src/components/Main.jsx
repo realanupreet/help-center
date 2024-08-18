@@ -13,8 +13,12 @@ const Main = () => {
 
     const fetchGridData = async () => {
         const data = { search: search };
-        console.log(data);
-        const response = await axios.post('http://localhost:3000/search', data); //TODO: make url a env variable
+        let response;
+        if (search == '' || search == null || search == undefined) {
+            response = await axios.get('http://localhost:3000/cards');
+        } else {
+            response = await axios.post('http://localhost:3000/search', data);
+        }
         return response.data;
     }
 

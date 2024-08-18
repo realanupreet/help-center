@@ -19,13 +19,12 @@ if (app.get('env') === 'development') {
     app.set('json spaces', 2);
 }
 
-app.get('/', async (req, res) => {
+app.get('/cards', async (req, res) => {
     const data = await getAllRequests(req.body);
     res.send(data);
 });
 
 app.post('/search', async (req, res) => {
-    console.log('request received', req.body);
     const data = await searchRequest(req.body);
     res.send(data);
 });
@@ -34,22 +33,20 @@ app.get('/ping', (req, res) => {
     res.send('Server is running');
 });
 
-app.get('/request/:id', async (req, res) => {
-    const id = req.params.id;
-    const data = await getOneRequest(id);
+app.get('/cards/:title', async (req, res) => {
+    const title = req.params.title;
+    const data = await getOneRequest(title);
     res.send(data);
 });
 
-app.post('/', async (req, res) => {
+app.post('/cards', async (req, res) => {
     let request = req.body;
     request.data = request.description || '';
     const id = await createRequest(request);
-    setTimeout(() => {
-        res.send({
-            message: 'Request created successfully',
-            id: id,
-        });
-    }, 2000);
+    res.send({
+        message: 'Request created successfully',
+        id: id,
+    });
 });
 
 //middleware to handle errors

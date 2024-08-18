@@ -11,12 +11,14 @@ const getAllRequests = async () => {
     return result;
 }
 
-const getOneRequest = async (id) => {
+const getOneRequest = async (title) => {
+    console.log(title);
     try {
-        let result = await prisma.card.findUnique({
-            where: { id: parseInt(id) },
+        let result = await prisma.card.findMany({
+            where: { title: title },
         });
-        return result[0];
+        console.log(result);
+        return result;
     } catch (error) {
         return { error: 'Request not found' };
     }
@@ -46,7 +48,7 @@ const searchRequest = async (request) => {
 }
 
 console.log(await getAllRequests());
-console.log(await getOneRequest(1));
+console.log(await getOneRequest('sample'));
 // console.log(await createRequest({ title: 'New Request', data: 'This is a new request' }));
 console.log('search test');
 console.log(await searchRequest({ search: 'ne' }));

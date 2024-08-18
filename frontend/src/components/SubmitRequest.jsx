@@ -12,7 +12,7 @@ const SubmitRequest = () => {
 
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: async (newData) => {
-            await axios.post('http://localhost:3000/', newData);
+            await axios.post('http://localhost:3000/cards', newData);
         },
         onSuccess: () => {
             // Invalidate and refetch the grid data after adding new data
